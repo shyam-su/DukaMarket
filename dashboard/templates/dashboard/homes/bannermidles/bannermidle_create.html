@@ -1,0 +1,16 @@
+{% extends 'dashboard/includes/dash_base.html' %}
+
+{% block body %}
+
+<div class="container mt-5">
+    <!-- Edit Brand Form -->
+    <h2 class="mb-4">Add Banner Midle</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Add Banner Midle</button>
+    </form>
+    
+</div>
+
+{% endblock body %}

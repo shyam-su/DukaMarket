@@ -1,0 +1,32 @@
+
+{% extends 'dashboard/includes/dash_base.html' %}
+
+{% block body%}
+
+<div class="container mt-5">
+ <!-- Edit Feature Form -->
+ <h2 class="mb-4">Edit Feature</h2>
+ <form method="post" enctype="multipart/form-data">
+    <!-- CSRF Token -->
+     {% csrf_token %}
+     <div class="mb-3">
+         <label for="Title" class="form-label">Title</label>
+         <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title" value="{{ feature.title }}" required>
+     </div>
+     <div class="mb-3">
+         <label for="Description" class="form-label">Description</label>
+         <input type="text" class="form-control" id="description" name="description" placeholder="Enter Title" value="{{ feature.description }}" required>
+     </div>
+     <div class="mb-3">
+         <label for="Icon" class="form-label">Icon</label>
+         <input type="text" class="form-control" id="Icon" name="icon" placeholder="Enter Icon" value="{{ feature.icon }}" required>
+     </div>
+     <!-- Submit Button -->
+     <div class="d-grid gap-2">
+         <button type="submit" class="btn btn-primary">Update Feature</button>
+     </div>
+ </form>
+</div>
+<hr>
+
+{% endblock body %}

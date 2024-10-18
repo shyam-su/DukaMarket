@@ -1,0 +1,20 @@
+{% extends 'dashboard/includes/dash_base.html' %}
+
+{% block body %}
+<div class="container mt-5">
+    <!-- Add Brands Form -->
+    <h2 class="mb-4">Add Brand</h2>
+    <form method="post" enctype="multipart/form-data" action="{% url 'dashboard:create_brand' %}">
+        <!-- CSRF Token -->
+        {% csrf_token %}
+
+        <!-- Brand Form -->
+        {{ form.as_p }}
+
+        <!-- Submit Button -->
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">Add Brand</button>
+        </div>
+    </form>
+</div>
+{% endblock body %}

@@ -1,0 +1,56 @@
+{% extends 'dashboard/includes/dash_base.html' %}
+
+{% block body%}
+
+<div class="container mt-5">
+  <!-- Edit Top Banners Form -->
+  <h2 class="mb-4">Edit Top Banners</h2>
+  <form method="post" enctype="multipart/form-data">
+    <!-- CSRF Token -->
+    {% csrf_token %}
+
+    <!-- Discount Deals Dropdown -->
+    <div class="mb-3">
+      <label for="discountDeals" class="form-label">Discount Deals</label>
+      <select class="form-control" id="discountDeals" name="deals" required>
+        {% for deal in deals %}
+        <option value="{{ deal.id }}" {% if deal.id == banner_top.deals.id %}selected{% endif %}>{{ deal.delas }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Top Banners Image -->
+    <div class="mb-3">
+      <label for="sliderImage" class="form-label">Top Banners Image</label>
+      <input class="form-control" type="file" id="sliderImage" name="image">
+      <img src="{{ banner_top.image.url }}" alt="{{ banner_top.deals.deals }}" class="img-thumbnail mt-2" width="100">
+      <small>Current Image: {{ banner_top.image }}</small>
+    </div>
+
+    <!-- Discount -->
+    <div class="mb-3">
+      <label for="discount" class="form-label">Discount</label>
+      <input type="number" class="form-control" id="discount" name="discount" placeholder="Enter discount" value="{{ banner_top.discount }}" required>
+    </div>
+
+    <!-- Quote -->
+    <div class="mb-3">
+      <label for="quote" class="form-label">Quote</label>
+      <input type="text" class="form-control" id="quote" name="quote" placeholder="Enter quote" value="{{ banner_top.quote }}" required>
+    </div>
+
+    <!-- Link -->
+    <div class="mb-3">
+      <label for="link" class="form-label">Link</label>
+      <input type="url" class="form-control" id="link" name="link" placeholder="Enter URL" value="{{ banner_top.link }}" required>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="d-grid gap-2">
+      <button type="submit" class="btn btn-primary">Update Top Banners</button>
+    </div>
+  </form>
+</div>
+<hr>
+
+{% endblock body %}

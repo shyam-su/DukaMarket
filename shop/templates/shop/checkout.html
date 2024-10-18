@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load static %}
+{% block container %}
+<main>
+    <!-- page-banner-area-start -->
+
+    {% for ban in bann %}
+
+    <div class="page-banner-area page-banner-height-2" data-background="{{ban.image.url}}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="page-banner-content text-center">
+                        <h4 class="breadcrumb-title">{{ban.title}}t</h4>
+                        <div class="breadcrumb-two">
+                            <nav>
+                                <nav class="breadcrumb-trail breadcrumbs">
+                                    <ul class="breadcrumb-menu">
+                                        <li class="breadcrumb-trail">
+                                            <a href="{% url 'home:home' %}"><span>Home</span></a>
+                                        </li>
+                                        <li class="trail-item">
+                                            <span>Checkout</span>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <!-- page-banner-area-end -->
+
+
+
+<!-- checkout-area-start -->
+<section class="checkout-area pb-85">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <form action="{% url 'shop:checkout' %}" method='POST'>
+                    {% csrf_token %}
+                    <div class="checkbox-form">
+                        <h3>Billing Details</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="checkout-form-list">
+                                    <label for="id_first_name">First Name <span class="required">*</span></label>
+                                    <input type="text" id="id_first_name" name="first_name" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="checkout-form-list">
+                                    <label for="id_last_name">Last Name <span class="required">*</span></label>
+                                    <input type="text" id="id_last_name" name="last_name" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="checkout-form-list">
+                                    <label for="id_address">Address <span class="required">*</span></label>
+                                    <input type="text" id="id_address" name="address" placeholder="Street address">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="checkout-form-list">
+                                    <label for="id_city">Town / City <span class="required">*</span></label>
+                                    <input type="text" id="id_city" name="city" placeholder="Town / City">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="checkout-form-list">
+                                    <label for="id_postal_code">Postcode / Zip <span class="required">*</span></label>
+                                    <input type="text" id="id_postal_code" name="postal_code" placeholder="Postcode / Zip">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="checkout-form-list">
+                                    <label for="id_email">Email Address <span class="required">*</span></label>
+                                    <input type="email" id="id_email" name="email" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="checkout-form-list">
+                                    <label for="id_phone">Phone <span class="required">*</span></label>
+                                    <input type="text" id="id_phone" name="phone" placeholder="Phone">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order-button-payment mt-20 text-center">
+                            <button type="submit" class="tp-btn-h1">Place order</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- checkout-area-end -->
+
+
+
+
+
+    <!-- cta-area-start -->
+
+    {% include 'cat.html' %}
+
+    <!-- cta-area-end -->
+
+</main>
+
+{% endblock container %}

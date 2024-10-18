@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+{% block container %}
+<main>
+    <div class="container-fluid d-flex justify-content-center align-items-center min-vh-100">
+        <div class="col-lg-6">
+            <div class="your-order p-4 border rounded shadow-sm bg-white">
+                <h3 class="text-center mb-4">Your Order</h3>
+                
+                <form method="post" action="{% url 'shop:create_order' %}">
+                    {% csrf_token %}
+                    
+                    <!-- Render Cart Items -->
+                    <div class="your-order-table table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="product-name">Product</th>
+                                    <th class="product-total">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in cart %}
+                                <tr>
+                                    <td>{{ item.product.name }}</td>
+                                    <td>$ {{ item.product.price }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Quantity</td>
+                                    <td>{{ item.quantity }} pcs.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                            <tfoot>
+                                <tr class="order-total">
+                                    <th>Order Total</th>
+                                    <td>$ 100</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <!-- Hidden Fields for Order Data -->
+                    {% for item in cart %}
+                    <input type="hidden" name="product" value="{{ item.product.name }}">
+                    <input type="hidden" name="price" value="{{ item.product.price }}">
+                    <input type="hidden" name="quantity" value="{{ item.quantity }}">
+                    <input type="hidden" name="total_price" value=100>
+                    {% endfor %}
+                    <input type="hidden" name="payment_method" value="cash on delivery">
+                    <input type="hidden" name="status" value="pending">
+
+                    <!-- Payment Method Section -->
+                    <div class="payment-method">
+                        <div class="accordion" id="checkoutAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="esewaThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#esewa" aria-expanded="false" aria-controls="esewa">
+                                        Esewa
+                                    </button>
+                                </h2>
+                                <div id="esewa" class="accordion-collapse collapse" aria-labelledby="paypalThree" data-bs-parent="#checkoutAccordion">
+                                    <div class="accordion-body">
+                                        <p>Pay via esewa; you can pay with your credit card if you don’t have an esewa account.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="cashDelivery">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cash" aria-expanded="false" aria-controls="cash">
+                                        Cash on Delivery
+                                    </button>
+                                </h2>
+                                <div id="cash" class="accordion-collapse collapse" aria-labelledby="cashDelivery" data-bs-parent="#checkoutAccordion">
+                                    <div class="accordion-body">
+                                        <p>Pay with cash upon delivery. Please make sure you have the correct amount ready when the delivery arrives.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order-button-payment mt-3">
+                            <button type="submit" class="btn btn-primary w-100">Place order</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {% include 'cat.html' %}
+</main>
+{% endblock container %}

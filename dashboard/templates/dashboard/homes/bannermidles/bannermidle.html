@@ -1,0 +1,52 @@
+{% extends 'dashboard/includes/dash_base.html' %}
+
+{% block body%}
+
+<div class="container mt-5">
+    <hr>
+    <!-- Banner Middle Data Section -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Existing Banner Middle</h2>
+        <a href="{% url 'dashboard:create_bannermidle' %}" class="btn btn-primary">New Banner Middle</a>
+    </div>
+    <div class="table-responsive mb-5">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">Brand Name</th>
+                    <th scope="col">Discount</th>
+                    <th scope="col">Quote</th>
+                    <th scope="col">Discount Deals</th>
+                    <th scope="col">Banner Middle Image</th>
+                    <th scope="col">Link</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for midl in data %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ midl.deals }}</td>
+                    <td>{{ midl.discount }}</td>
+                    <td>{{ midl.quote }}</td>
+                    <td>{{ midl.discount_deals }}</td>
+                    <td><img src="{{ midl.image.url }}" alt="{{ midl.barnd_name.name }}" class="img-thumbnail" width="100"></td>
+                    <td><a href="{{ midl.link }}" target="_blank">{{ midl.link }}</a></td>
+                    <td>
+                        <!-- Actions like Edit/Delete -->
+                        <a href="{% url 'dashboard:edit_bannermidle' midl.id %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'dashboard:delete_bannermidle' midl.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Banner Middle?');">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="8" class="text-center">No Banner Middle found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <hr>
+</div>
+{% endblock body %}

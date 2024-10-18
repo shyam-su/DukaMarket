@@ -1,0 +1,47 @@
+
+{% extends 'dashboard/includes/dash_base.html' %}
+
+{% block body%}
+
+<div class="container mt-5">
+    <hr>
+    <!-- Feature  Data Section -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Existing Feature </h2>
+        <a href="{% url 'dashboard:create_feature' %}" class="btn btn-primary">New Feature </a>
+    </div>
+    <div class="table-responsive mb-5">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Icon</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for Feature  in data %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ Feature.icon }}</td>
+                    <td>{{ Feature.title }}</td>
+                    <td>{{ Feature.description }}</td>
+                    <td>
+                        <!-- Actions like Edit/Delete -->
+                        <a href="{% url 'dashboard:edit_feature' Feature.id %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'dashboard:delete_feature' Feature.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Feature ?');">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="8" class="text-center">No Feature  found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <hr>
+</div>
+{% endblock body %}

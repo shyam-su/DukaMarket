@@ -1,0 +1,24 @@
+{% extends 'dashboard/includes/dash_base.html' %}
+
+{% block body%}
+
+<div class="container mt-5">
+    <h2>Edit Top Deals</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.name.label_tag }} <!-- Label for the field -->
+            {{ form.name }} <!-- Form field itself -->
+            {% if form.name.errors %}
+                <div class="alert alert-danger">
+                    {{ form.name.errors }}
+                </div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Top Deals</button>
+    </form>
+</div>
+<hr>
+
+{% endblock body %}

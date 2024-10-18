@@ -1,0 +1,42 @@
+{% extends 'dashboard/includes/dash_base.html' %}
+
+{% block body%}
+
+<div class="container mt-5">
+    <hr>
+    <!-- Deals Data Section -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Existing Top Deals</h2>
+        <a href="{% url 'dashboard:create_topdeals' %}" class="btn btn-primary">New Top Deals</a>
+    </div>
+    <div class="table-responsive mb-5">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for topDea in top %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ topDea.name }}</td>
+
+                    <td>
+                        <!-- Actions like Edit/Delete -->
+                        <a href="{% url 'dashboard:edit_topdeals' topDea.id %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'dashboard:delete_topdeals' topDea.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Top Deals?');">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="8" class="text-center">No Top Deals found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <hr>
+</div>
+{% endblock body %}

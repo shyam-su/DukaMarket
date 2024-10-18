@@ -1,0 +1,222 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block container %}
+<main>  
+  <!-- slider-area-start -->
+    <div class="slider-area">
+        <div class="swiper-container slider__active">
+            <div class="slider-wrapper swiper-wrapper">
+                {% for i in sliders %}
+                <div class="single-slider swiper-slide slider-height d-flex align-items-center"
+                    data-background="{{i.image.url}}">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-5">
+                                <div class="slider-content">
+                                    <div class="slider-top-btn" data-animation="fadeInLeft" data-delay="1.5s">
+                                        <a href="product-details.html" class="st-btn b-radius">{{i.discount_deals}}</a>
+                                    </div>
+                                    <h2 data-animation="fadeInLeft" data-delay="1.7s" class="pt-15 slider-title pb-5">
+                                        SALE {{i.sales}}% OFF <br> {{i.barnd_name}}</h2>
+                                    <p class="pr-20 slider_text" data-animation="fadeInLeft" data-delay="1.9s">Discount
+                                        {{i.discount}}% On Products & Free Shipping</p>
+                                    <div class="slider-bottom-btn mt-75">
+                                        <a data-animation="fadeInUp" data-delay="1.15s" href="shop.html"
+                                            class="st-btn-b b-radius">Discover now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /single-slider -->
+                <div class="main-slider-paginations"></div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- slider-area-end -->
+
+
+
+
+    <!-- features__area-start -->
+    <section class="features__area pt-20">
+        <div class="container">
+            <div class="row row-cols-xxl-4 row-cols-xl-4 row-cols-lg-4 row-cols-md-2 row-cols-sm-2 row-cols-1 gx-0">
+                {% for i in featuresarea %}
+                <div class="col">
+                    <div class="features__item d-flex white-bg">
+                        <div class="features__icon mr-20">
+                            <i class="{{i.icon}}"></i>
+                        </div>
+                        <div class="features__content">
+                            <h6>{{i.title}}</h6>
+                            <p>{{i.description}}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- features__area-end -->
+
+    <!-- banner__area-start -->
+    <section class="banner__area pt-20 pb-10">
+        <div class="container">
+            <div class="row">
+                {% for i in banner_top %}
+                <div class="col-xl-4 col-lg-4 col-md-6">
+                    <div class="banner__item p-relative w-img mb-30">
+                        <div class="banner__img">
+                            <a href="product-details.html"><img src="{{i.image.url}}" alt=""></a>
+                        </div>
+                        <div class="banner__content">
+                            <h6><a href="product-details.html">{{i.deals}} <br> {{i.quote}}</a></h6>
+                            <p>Discount {{i.discount}}% On Products</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- banner__area-end -->
+
+    <!-- topsell__area-start -->
+    {% include 'shop/include/deals.html' %}
+    <!-- topsell__area-end -->
+
+    <!-- banner__area-start -->
+    <section class="banner__area banner__area-d pb-10">
+        <div class="container">
+            <div class="row">
+                {% for i in banner_middle %}
+                <div class="col-xl-6 col-lg-6 col-md-12">
+                    <div class="banner__item p-relative w-img mb-30">
+                        <div class="banner__img">
+                            <a href="product-details.html"><img src="{{i.image.url}}" alt=""></a>
+                        </div>
+                        <div class="banner__content">
+                            <span>{{i.deals}}</span>
+                            <h6><a href="product-details.html">{{i.quote}}</a></h6>
+                            <p>Discount {{i.discount}}% Off, Top Quality Products</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- banner__area-end -->
+
+    <!-- topsell__area-start -->
+    {% include 'shop/include/topsell.html' %}
+    <!-- topsell__area-end -->
+
+
+
+    <!-- moveing-text-area-start -->
+    <section class="moveing-text-area">
+        <div class="container">
+            <div class="ovic-running">
+                <div class="wrap">
+
+                    {% for i in moveing_text %}
+
+
+
+                    <div class="inner">
+                        <p class="item">{{i.text1}}</p>
+                        <p class="item">{{i.text2}}</p>
+                        <p class="item">{{i.text3}}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- moveing-text-area-end -->
+
+    <!-- banner__area-start -->
+    <section class="banner__area pt-60 pb-25">
+        <div class="container">
+            <div class="row">
+
+                {% for i in banner_button %}
+                <div class="col-xl-4 col-lg-6 col-md-12">
+                    <div class="banner__item p-relative w-img mb-30">
+                        <div class="banner__img">
+                            <a href="product-details.html"><img src="{{i.image.url}}" alt=""></a>
+                        </div>
+                        <div class="banner__content banner__content-sd text-center">
+                            <div class="banner-button mb-20">
+                                <a href="product-details.html" class="st-btn">{{i.title}}</a>
+                            </div>
+                            <h6><a href="product-details.html">Sale {{i.discount}}% Off <br> {{i.deals}}</a></h6>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.first %}
+                <div class="col-xl-4 col-lg-6 col-md-12">
+                    <div class="row">
+                        {% for j in bannerbottommiddle %}
+                        <div class="col-md-12">
+                            <div class="banner__item p-relative mb-30 w-img">
+                                <div class="banner__img">
+                                    <a href="product-details.html"><img src="{{j.image.url}}" alt=""></a>
+                                </div>
+                                <div class="banner__content banner__content-sd text-center">
+                                    <h6><a href="product-details.html">{{j.deals}}</a></h6>
+                                    <p>{{j.title}}</p>
+                                    <div class="banner-button mt-20 d-none d-sm-block">
+                                        <a href="product-details.html" class="st-btn-3 b-radius">Shop Deals</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </section>
+    <!-- banner__area-end -->
+
+    <!-- recomand-product-area-start -->
+    {% include 'shop/include/specialoffer.html' %}
+    <!-- recomand-product-area-end -->
+
+    <!-- brand-area-start -->
+    <section class="brand-area brand-area-d">
+        <div class="container">
+            <div class="brand-slider swiper-container pt-50 pb-45">
+                <div class="swiper-wrapper">
+                    {% for i in brand %}
+                    <div class="brand-item w-img swiper-slide">
+                        <a href="#"><img src="{{i.image.url}}" alt="{{i.name}}"></a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- brand-area-end -->
+
+    <!-- cta-area-start -->
+
+    {% include 'cat.html' %}
+
+    <!-- cta-area-end -->
+
+    {% include 'includes/modal.html' %}
+
+</main>
+{% endblock container %}
+
+
+    

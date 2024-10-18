@@ -1,0 +1,316 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block container %}
+
+    <main>
+        {% for i in banner %}
+
+
+        <!-- page-banner-area-start -->
+        <div class="page-banner-area page-banner-height" data-background="{{ i.image.url }}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="page-banner-content text-center">
+                            <h3>About Us</h3>
+                            <p>{{i.title}} <br> {{i.description}}</p>
+                            <div class="page-bottom-btn mt-55">
+                                <a href="shop.html" class="st-btn-4">Discover now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <!-- page-banner-area-end -->
+
+        <!-- about-area-start -->
+         
+        
+        
+        
+        <div class="about-area pt-80 pb-80" data-background="{% static 'assets/img/bg/about-bg.png' %}">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="about-content">
+                            <span>ABOUT OUR ONLINE STORE</span>
+                            <h4>Hello,</h4>
+                            {% for section in aboutsection %}
+                                <h5 class="banner-t mb-30">{{ section.title }}</h5>
+                                <p class="about-text">{{ section.Sub_desc }}</p>
+                                <p>{{ section.description }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    {% for section in aboutsection %}
+                        {% if section.image %}
+                            <div class="col-xl-6 col-lg-6">
+                                <div class="about-image w-img">
+                                    <img src="{{ section.image.url }}" alt="About Section Image">
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- about-area-end -->
+        
+        <!-- services-area-start -->
+        <div class="services-area pt-70 light-bg-s pb-50">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="abs-section-title text-center">
+                            <span>HOW IT WORKS</span>
+                            <h4>{{services_area_title}}</h4>
+                            <p>{{services_area_description}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-40">
+                    {% for step in service %}
+                    <div class="col-xl-4 col-lg-4 col-md-6">
+                        <div class="services-item mb-30">
+                            <div class="services-icon mb-25">
+                                <i class="{{ step.icon_class }}"></i>
+                            </div>
+                            <h6>{{ step.title }}</h6>
+                            <p>{{ step.description }}</p>
+                            <div class="s-count-number">
+                                <span>{{ step.step_number }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- services-area-end -->
+
+        <!-- technolgy-index-start -->
+        <div class="technolgy-index mt-70 mb-10">
+            <div class="container">
+                <div class="row mb-15">
+                    <div class="col-xl-12">
+                        <div class="abs-section-title text-center">
+                            <span>TECHNOLOGY INDEX</span>
+                            {% if technologyindex %}
+                            <h4>{{ technologyindex.first.title }}</h4>
+                            <p>{{ technologyindex.first.description }}</p>
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">                      
+                    {% for item in technologyindex %}
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="main-abs mb-30">
+                            <div class="ab-counter-image w-img mb-40">
+                                <img src="{{ item.image.url }}" alt="">
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                    <div class="ab-counter-item mb-30">
+                                        <div class="ab-counter mb-20">
+                                            <div class="counter-icon mr-10">
+                                                <img src="assets/img/about/c-icon-01.png" alt="">
+                                            </div>
+                                            <div class="counter_info">
+                                                <span class="counter">{{ item.active_clients }}</span>
+                                                <p>+</p>
+                                            </div>
+                                        </div>
+                                        <h5>Active Clients</h5>
+                                        <p>{{ item.description }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                    <div class="ab-counter-item mb-30">
+                                        <div class="ab-counter mb-20">
+                                            <div class="counter-icon mr-10">
+                                                <img src="assets/img/about/c-icon-01.png" alt="">
+                                            </div>
+                                            <div class="counter_info">
+                                                <span class="counter">{{ item.projects_done }}</span>
+                                                <p>+</p>
+                                            </div>
+                                        </div>
+                                        <h5>Projects Done</h5>
+                                        <p>{{ item.description }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="main-abs mb-30">
+                            <div class="ab-counter-image w-img mb-40">
+                                <img src="{{ item.images.url }}" alt="">
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                    <div class="ab-counter-item mb-30">
+                                        <div class="ab-counter mb-20">
+                                            <div class="counter-icon mr-10">
+                                                <img src="assets/img/about/c-icon-01.png" alt="">
+                                            </div>
+                                            <div class="counter_info">
+                                                <span class="counter">{{ item.team_advisors }}</span>
+                                                <p>+</p>
+                                            </div>
+                                        </div>
+                                        <h5>Team Advisors</h5>
+                                        <p>{{ item.description }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                    <div class="ab-counter-item mb-30">
+                                        <div class="ab-counter mb-20">
+                                            <div class="counter-icon mr-10">
+                                                <img src="assets/img/about/c-icon-01.png" alt="">
+                                            </div>
+                                            <div class="counter_info">
+                                                <span class="counter">{{ item.users_online }}</span>
+                                                <p>k</p>
+                                            </div>
+                                        </div>
+                                        <h5>Users Online</h5>
+                                        <p>{{ item.description }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+
+            </div>
+        </div>
+        <!-- technolgy-index-end -->
+
+        <!-- team-area-start -->
+
+        <div class="team-area light-bg-s pt-70 pb-40">
+            <div class="container">
+                <div class="row mb-35">
+                    <div class="col-xl-12">
+                        <div class="abs-section-title text-center">
+                            <span>THE TEAM</span>
+                            
+                            {% if teammember %}
+                                
+                                
+                            <h4>{{teammember.first.title}}</h4>
+                            <p>{{teammember.first.descr}}</p>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    {% for tem in teammember %}
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                            <div class="single-team text-center mb-30">
+                                <div class="team-image mb-35 w-img">
+                                    <div class="inner-timg">
+                                        <a href="about.html">
+                                            <img src="{{tem.image.url}}" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="tauthor-degination mb-15">
+                                    <h5><a href="about.html">{{tem.name}}</a></h5>
+                                    <span>{{tem.pposition}}</span>
+                                </div>
+                                <div class="team-social">
+                                    <a href="{{tem.facebook}}"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="{{tem.twitter}}"><i class="fab fa-twitter"></i></a>
+                                    <a href="{{tem.dribbble}}"><i class="fab fa-dribbble"></i></a>
+                                    <a href="{{tem.youtube}}"><i class="fab fa-youtube"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                
+            </div>
+        </div>
+        <!-- team-area-end -->
+
+       <!-- location-area-start -->
+<div class="location-area pt-70 pb-25">
+    <div class="container">
+        <div class="row mb-25">
+            <div class="col-xl-12">
+                <div class="abs-section-title text-center">
+                    <span>LOCATION STORE</span>
+                    
+                    {% if locations %}
+                        <h4>{{ locations.first.title }}</h4>
+                        <p>{{ locations.first.descr }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="row">
+                {% for location in locations %}
+                    <div class="col-xl-3 col-lg-3 col-md-6">
+                        <div class="location-item mb-30">
+                            <div class="location-image w-img mb-20">
+                                <img src="{{ location.image.url }}" alt="">
+                            </div>
+                            <h6>{{ location.address }}</h6>
+                            <div class="sm-item-loc sm-item-border mb-20">
+                                <div class="sml-icon mr-20">
+                                    <i class="fal fa-map-marker-alt"></i>
+                                </div>
+                                <div class="sm-content">
+                                    <span>Find us</span>
+                                    <p>{{ location.city }}, {{ location.country }}</p>  
+                                </div>
+                            </div>
+                            <div class="sm-item-loc sm-item-border mb-20">
+                                <div class="sml-icon mr-20">
+                                    <i class="fal fa-phone-alt"></i>
+                                </div>
+                                <div class="sm-content">
+                                    <span>Call us</span>
+                                    <p><a href="tel:+{{ location.phone }}">{{ location.phone }}</a></p>  
+                                </div>
+                            </div>
+                            <div class="sm-item-loc mb-20">
+                                <div class="sml-icon mr-20">
+                                    <i class="fal fa-envelope"></i>
+                                </div>
+                                <div class="sm-content">
+                                    <span>Mail us</span>
+                                    <p><a href="mailto:{{ location.email }}">{{ location.email }}</a></p>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- location-area-end -->
+
+        <!-- cta-area-start -->
+        {% include 'cat.html' %}
+        <!-- cta-area-end -->
+
+    </main>
+
+    {% endblock container %}
+
+   

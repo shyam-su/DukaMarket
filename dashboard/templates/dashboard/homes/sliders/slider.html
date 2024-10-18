@@ -1,0 +1,52 @@
+{% extends 'dashboard/includes/dash_base.html' %}
+
+{% block body%}
+
+<div class="container mt-5">
+    <hr>
+    <!-- Slider Data Section -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Existing Sliders</h2>
+        <a href="{% url 'dashboard:add_slider' %}" class="btn btn-primary">New Slider</a>
+    </div>
+    <div class="table-responsive mb-5">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">Brand Name</th>
+                    <th scope="col">Discount</th>
+                    <th scope="col">Sales</th>
+                    <th scope="col">Discount Deals</th>
+                    <th scope="col">Slider Image</th>
+                    <th scope="col">Link</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for slider in slide %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ slider.barnd_name }}</td>
+                    <td>{{ slider.discount }}</td>
+                    <td>{{ slider.sales }}</td>
+                    <td>{{ slider.discount_deals }}</td>
+                    <td><img src="{{ slider.image.url }}" alt="{{ slider.barnd_name.name }}" class="img-thumbnail" width="100"></td>
+                    <td><a href="{{ slider.link }}" target="_blank">{{ slider.link }}</a></td>
+                    <td>
+                        <!-- Actions like Edit/Delete -->
+                        <a href="{% url 'dashboard:edit_slider' slider.id %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'dashboard:delete_slider' slider.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this slider?');">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="8" class="text-center">No sliders found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <hr>
+</div>
+{% endblock body %}

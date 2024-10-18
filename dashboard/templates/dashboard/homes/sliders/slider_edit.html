@@ -1,0 +1,65 @@
+{% extends 'dashboard/includes/dash_base.html' %}
+
+{% block body%}
+
+<div class="container mt-5">
+ <!-- Edit Slider Form -->
+ <h2 class="mb-4">Edit Slider</h2>
+ <form method="post" enctype="multipart/form-data">
+    <!-- CSRF Token -->
+     {% csrf_token %}
+
+     <!-- Brand Name Dropdown -->
+     <div class="mb-3">
+         <label for="brandName" class="form-label">Brand Name</label>
+         <select class="form-control" id="brandName" name="brand_id" required>
+             {% for brand in brands %}
+                 <option value="{{ brand.id }}" {% if brand.id == slider.brand_id %}selected{% endif %}>{{ brand.name }}</option>
+             {% endfor %}
+         </select>
+     </div>
+
+     <!-- Discount -->
+     <div class="mb-3">
+         <label for="discount" class="form-label">Discount</label>
+         <input type="text" class="form-control" id="discount" name="discount" placeholder="Enter discount" value="{{ slider.discount }}" required>
+     </div>
+
+     <!-- Sales -->
+     <div class="mb-3">
+         <label for="sales" class="form-label">Sales</label>
+         <input type="text" class="form-control" id="sales" name="sales" placeholder="Enter sales details" value="{{ slider.sales }}" required>
+     </div>
+
+     <!-- Discount Deals Dropdown -->
+     <div class="mb-3">
+         <label for="discountDeals" class="form-label">Discount Deals</label>
+         <select class="form-control" id="discountDeals" name="discount_deals" required>
+             {% for deal in deals %}
+             <option value="{{ deal.id }}" {% if deal.id == slider.discount_deals %}selected{% endif %}>{{ deal.delas }}</option>
+             {% endfor %}
+         </select>
+     </div>
+
+     <!-- Slider Image -->
+     <div class="mb-3">
+         <label for="sliderImage" class="form-label">Slider Image</label>
+         <input class="form-control" type="file" id="sliderImage" name="slider_image">
+         <img src="{{ slider.image.url }}" alt="{{ slider.brand.name }}" class="img-thumbnail mt-2" width="100">
+     </div>
+
+     <!-- Link -->
+     <div class="mb-3">
+         <label for="link" class="form-label">Link</label>
+         <input type="url" class="form-control" id="link" name="link" placeholder="Enter URL" value="{{ slider.link }}" required>
+     </div>
+
+     <!-- Submit Button -->
+     <div class="d-grid gap-2">
+         <button type="submit" class="btn btn-primary">Update Slider</button>
+     </div>
+ </form>
+</div>
+<hr>
+
+{% endblock body %}

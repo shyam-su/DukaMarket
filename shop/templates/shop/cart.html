@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block container %}
+    
+    <main>
+        <!-- page-banner-area-start -->
+         
+         {% for ban in banner %}
+
+        <div class="page-banner-area page-banner-height-2" data-background="{{ban.Bg_image.url}}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="page-banner-content text-center">
+                            <h4 class="breadcrumb-title">{{ban.title}}</h4>
+                            <div class="breadcrumb-two">
+                                <nav>
+                                   <nav class="breadcrumb-trail breadcrumbs">
+                                      <ul class="breadcrumb-menu">
+                                         <li class="breadcrumb-trail">
+                                            <a href="index.html"><span>Home</span></a>
+                                         </li>
+                                         <li class="trail-item">
+                                            <span>Cart</span>
+                                         </li>
+                                      </ul>
+                                   </nav> 
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <!-- page-banner-area-end -->
+
+        <!-- cart-area-start -->
+<!-- cart-area-start -->
+
+<section class="cart-area pt-120 pb-120">
+   <div class="container">
+       <div class="row">
+           <div class="col-12">
+               <form action="#">
+                   <div class="table-content table-responsive">
+                       <table class="table">
+                           <thead>
+                               <tr>
+                                   <th class="product-thumbnail">Images</th>
+                                   <th class="cart-product-name">Product</th>
+                                   <th class="product-price">Unit Price</th>
+                                   <th class="product-quantity">Quantity</th>
+                                   <th class="product-subtotal">Total</th>
+                                   <th class="product-remove">Remove</th>
+                               </tr>
+                           </thead>
+                           <tbody>
+                            {% for cart in cart_items %}
+                            <tr>
+                                <td class="product-thumbnail">
+                                    {% if cart.product.image %}
+                                        <a href="shop-details.html"><img src="{{ cart.product.image.url }}" alt="{{ cart.product.name }}"></a>
+                                    {% else %}
+                                        <img src="path/to/default-image.jpg" alt="No image available">
+                                    {% endif %}
+                                </td>
+                                <td class="product-name"><a href="shop-details.html">{{ cart.product.name }}</a></td>
+                                <td class="product-price"><span class="amount">${{ cart.product.price }}</span></td>
+                                <td class="product-quantity">
+                                    <div class="cart-plus-minus">
+                                        <form method="post" action="{% url 'shop:item_increment' cart.id %}">
+                                            {% csrf_token %}
+                                            <button type="submit" class="inc qtybutton">+</button>
+                                        </form>
+                                        <input type="text" value="{{ cart.quantity }}" readonly>
+                                        <form method="post" action="{% url 'shop:item_decrement' cart.id %}">
+                                            {% csrf_token %}
+                                            <button type="submit" class="dec qtybutton">-</button>
+                                        </form>
+                                    </div>
+                                </td>
+                                <td class="product-subtotal"><span class="amount">${{ cart.total }}</span></td>
+                                <td class="product-remove">
+                                    <form method="post" action="{% url 'shop:remove_from_cart' cart.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="remove"><i class="fa fa-times"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                           </tbody>
+                       </table>
+                       
+                   </div>
+
+                   <div class="row justify-content-end">
+                       <div class="col-md-5">
+                           <div class="cart-page-total">
+                               <h2>Cart totals</h2>
+                               <ul class="mb-20">
+                                   <li>Total <span>${{ total_price }}</span></li>
+                               </ul>
+                               <a class="tp-btn-h1" href="{% url 'shop:checkout' %}">Proceed to checkout</a>
+                           </div>
+                       </div>
+                   </div>
+               </form>
+           </div>
+       </div>
+   </div>
+</section>
+         <!-- cart-area-end -->
+
+        <!-- cta-area-start -->
+        {% include 'cat.html' %}
+        <!-- cta-area-end -->
+
+    </main>
+
+    {% endblock container %}

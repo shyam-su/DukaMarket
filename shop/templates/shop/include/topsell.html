@@ -1,0 +1,100 @@
+<!-- topsell__area-start -->
+{% load static %}
+<section class="topsell__area-2 pt-15">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="section__head d-flex justify-content-between mb-10">
+                    <div class="section__title">
+                        <h5 class="st-titile">Top Selling Products</h5>
+                    </div>
+                    <div class="product__nav-tab"> 
+                        <ul class="nav nav-tabs" id="flast-sell-tab" role="tablist">
+                            
+                            {% for cat in category %}
+   
+                            <li class="nav-item" role="presentation">
+                              <button class="nav-link active" id="computer-tab" data-bs-toggle="tab" data-bs-target="#computer" type="button" role="tab" aria-controls="computer" aria-selected="false">{{cat.name}}</button>
+                            </li>
+                            {% endfor %}
+                          </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="tab-content" id="flast-sell-tabContent">
+                    <div class="tab-pane fade active show" id="computer" role="tabpanel" aria-labelledby="computer-tab">
+                        <div class="product-bs-slider-2">
+                            <div class="product-slider-2 swiper-container">
+                                <div class="swiper-wrapper">
+                                    
+                                    {% for top in topsell %}
+   
+                                    <div class="product__item swiper-slide">
+                                        <div class="product__thumb fix">
+                                            <div class="product-image w-img">
+                                                <!-- <a href="{% url 'shop:product' top.id %}"> -->
+                                                    <img src="{{top.name.image.url}}" alt="product">
+                                                </a>
+                                            </div>
+                                            <div class="product__offer">
+                                            <span class="discount">-{{top.name.discount}}%</span>
+                                            </div>
+                                            <div class="product-action">
+                                                <a href="#" class="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
+                                                    <i class="fal fa-eye"></i>
+                                                    <i class="fal fa-eye"></i>
+                                                </a>
+                                                <a href="#" class="icon-box icon-box-1">
+                                                    <i class="fal fa-heart"></i>
+                                                    <i class="fal fa-heart"></i>
+                                                </a>
+                                                <a href="#" class="icon-box icon-box-1">
+                                                    <i class="fal fa-layer-group"></i>
+                                                    <i class="fal fa-layer-group"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product__content">
+                                            <h6><a href="product-details.html">{{top.name.name}}</a></h6>
+                                            <div class="rating mb-5">
+                                                <ul>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                </ul>
+                                                <span>(01 review)</span>
+                                            </div>
+                                            <div class="price">
+                                                <span>${{top.name.price}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="product__add-cart text-center">
+                                            <button type="button" class="cart-btn product-modal-sidebar-open-btn d-flex align-items-center justify-content-center w-100">
+                                            Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <!-- If we need navigation buttons -->
+                            <div class="bs-button bs2-button-prev"><i class="fal fa-chevron-left"></i></div>
+                            <div class="bs-button bs2-button-next"><i class="fal fa-chevron-right"></i></div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+ <!-- topsell__area-end -->

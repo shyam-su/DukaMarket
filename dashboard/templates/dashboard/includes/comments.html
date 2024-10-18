@@ -1,0 +1,37 @@
+{% extends 'dashboard/dash_base.html' %}
+{% load static %}
+
+{% block body %}
+    
+    
+                <div class="container mt-5">
+                    <h2 class="mb-4"> Commnets </h2>
+                    
+                    {% for comment in all_comment %}
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <strong>{{comment.name}}</strong> commented on <em>"{{comment.post}}"</em>
+                            <span class="float-right">{{comment.date | date:"d M Y"}}</span>
+                        </div>
+                        <div class="card-body">
+                            <p>{{comment.comment}}</p>
+                        </div>
+                        
+                        {% if not comment.is_approved %}
+                            
+                            
+                        <div class="card-footer text-muted">
+                            Awaiting moderation
+                        </div>
+                        {% endif %}
+
+                    </div>
+                    {% endfor %}
+                </div>
+                
+
+            </div>
+        
+            <!-- End of Main Content -->
+
+            {% endblock body %}
