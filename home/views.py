@@ -50,7 +50,7 @@ def home_view(request):
     
     except Exception as e:
         print(f"An error occurred: {e}")
-        messages.error('An error occurred while loading the Home page. Please try again later.')
+        messages.error(request,'An error occurred while loading the Home page. Please try again later.')
         return render(request, 'errors/404.html')
     
     

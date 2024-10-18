@@ -7,6 +7,8 @@ from decimal import Decimal
 from django.contrib import messages
 from .forms import *
 from django.db import transaction
+from django.contrib.auth.decorators import login_required
+
 
 
 # Create your views here.
@@ -223,6 +225,7 @@ def calculate_total_price(items):
             continue
     return total_price
 
+@login_required
 def checkout_view(request):
     if request.method == 'POST':
         form = CheckoutForm(request.POST, user=request.user)
@@ -234,7 +237,7 @@ def checkout_view(request):
     return render(request, 'shop/checkout.html', {'form': form})
 
 
-
+@login_required
 def create_order(request):
     if request.method == 'POST':
         # Get hidden fields data from the form
@@ -274,6 +277,7 @@ def create_order(request):
 def sucess_view(request):
     return render(request, 'shop/sucess.html')
 
+@login_required
 def order_confirmation(request):
     try:
         cach_data =cache.get('order_page_data')

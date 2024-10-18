@@ -31,7 +31,6 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractUser):
     username = None
-    full_name = models.CharField(max_length=255, blank=True, null=True)
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=50)
     gender = models.CharField(max_length=255, choices=[('Male', 'Male'), ('Female', 'Female')])
@@ -39,6 +38,14 @@ class CustomUser(AbstractUser):
     bio = models.TextField(blank=True, null=True)
     location = models.CharField(max_length=100, blank=True, null=True)
     birth_date = models.DateField(blank=True, null=True)
+    
+    ROLE_CHOICES = [
+        ('customer', 'Customer'),
+        ('seller', 'Seller'),
+        ('admin', 'Admin'),
+    ]
+
+    role = models.CharField(max_length=50, choices=ROLE_CHOICES, default='customer')
 
     groups = models.ManyToManyField(
         'auth.Group',
@@ -53,7 +60,7 @@ class CustomUser(AbstractUser):
         help_text='Specific permissions for this user.'
     )
 
-    REQUIRED_FIELDS = ["full_name"]
+    REQUIRED_FIELDS = ["phone_number"]
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
 
@@ -62,7 +69,7 @@ class CustomUser(AbstractUser):
     class Meta:
         verbose_name = 'User Profile'
         verbose_name_plural = 'User Profiles'
-        indexes = [models.Index(fields=['full_name', 'email', 'phone_number'])]
+        indexes = [models.Index(fields=['email', 'phone_number'])]
 
     def save(self, *args, **kwargs):
         if not self.phone_number.startswith('+977'):

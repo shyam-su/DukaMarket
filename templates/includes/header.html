@@ -9,24 +9,27 @@
                         <div class="header-inner-start">
                             <div class="support d-none d-sm-block">
                                 {% if user.is_authenticated %}
-                                
-                                {% if role == 'customer' %}
+                                {% if user.is_superuser %}
+                                    <!-- Superuser-specific content -->
+                                    <p>Welcome, Superuser !</p>
+                                {% elif role == 'customer' %}
                                     <!-- Customer-specific content -->
-                                    <p>Welcome, valued customer!</p>
+                                    <p>Welcome, valued customer !</p>
                                 {% elif role == 'seller' %}
                                     <!-- Seller-specific content -->
-                                    <p>Welcome, esteemed seller!</p>
+                                    <p>Welcome, esteemed seller !</p>
                                 {% elif role == 'admin' %}
                                     <!-- Admin-specific content -->
-                                    <p>Welcome, administrator!</p>
+                                    <p>Welcome, administrator !</p>
                                 {% else %}
                                     <!-- General authenticated user content -->
-                                    <p>Welcome, {{ user.username }}!</p>
+                                    <p>Welcome, {{ user.first_name }} !</p>
                                 {% endif %}
                             {% else %}
                                 <p>Please log in to access this content.</p>
                             {% endif %}
-                            
+
+
                             </div>
                         </div>
                     </div>
@@ -34,8 +37,6 @@
                         <div class="header-inner-end text-md-end">
                             <div class="ovic-menu-wrapper">
                                 <ul>
-                                    <li><a href="http://127.0.0.1:8000/admin/login/?next=/admin/">My Profile </a>
-                                    </li>
                                     <li><a href="{% url 'blog:blog' %}">Blog</a></li>
                                     <li><a href="{% url 'contact:contact' %}">Contact Us</a></li>
                                 </ul>
@@ -81,15 +82,15 @@
                                         <span class="sub">My Account</span>
                                     </span>
                                 </a>
-                                <!-- <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                                <ul class="dropdown-menu" aria-labelledby="userDropdown">
                                     {% if user.is_authenticated %}
-                                        <li><a class="dropdown-item" href="">Profile</a></li>
-                                        <li><a class="dropdown-item" href="">Logout</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
                                     {% else %}
-                                        <li><a class="dropdown-item" href="">Login</a></li>
-                                        <li><a class="dropdown-item" href="">Sign Up</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'account_login' %}">Login</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'account_signup' %}">Sign Up</a></li>
                                     {% endif %}
-                                </ul> -->
+                                </ul>
                             </div>
                             
 

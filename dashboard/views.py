@@ -1,14 +1,16 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import *
-# from core.models import *
+from user.models import *
 from shop.models import *
 from blog.models import *
 from home.models import *
 
 
 # Create your views here.
+@login_required
 def dashboard(request):
     # total_user=UserProfile.objects.all().count()
     total_product=Product.objects.all().count()
