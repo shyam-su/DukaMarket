@@ -20,8 +20,8 @@ from debug_toolbar.toolbar import debug_toolbar_urls
 
 
 urlpatterns = [
-    path('admins/', admin.site.urls),
-    path('admin/', include('admin_honeypot.urls')),  
+    path('admin/', admin.site.urls),
+    # path('admin/', include('admin_honeypot.urls')),  
     path('', include("home.urls")),
     path('shop/', include("shop.urls")),
     path('user/', include("user.urls")),
